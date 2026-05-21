@@ -131,17 +131,8 @@ jobs:
         echo "##[endgroup]"
 
     - name: Collect logs
-      id: cluster-logs
       if: always()
-      run: |
-        set -euo pipefail
-
-        echo "logs-dir=$(kind export logs --name kind)" >> "${GITHUB_OUTPUT}"
-    - uses: actions/upload-artifact@v7
-      if: always()
-      with:
-        name: kind-logs-${{ matrix.name }}
-        path: "${{ steps.cluster-logs.outputs.logs-dir }}"
+      uses: ./logs
 
   done:
     # used as a non-matrix job for protected branches
