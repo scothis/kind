@@ -133,6 +133,8 @@ jobs:
     - name: Collect logs
       if: always()
       uses: ./logs
+      with:
+        artifact-name: "kind-logs-${{ matrix.name }}"
 
   done:
     # used as a non-matrix job for protected branches
